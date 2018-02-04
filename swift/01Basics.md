@@ -1,4 +1,4 @@
-**We don't repeat simple rules mentioned in 00FirstGlance.md** 
+**We don't repeat simple rules mentioned in [00FirstGlance.md](https://github.com/xshii/XSNote/blob/master/swift/00FirstGlance.md)** 
 # Introduction core feature
 * **Swift** provides its own versions of all fundamental C and Obj-C types.
     * ```Int```
@@ -262,3 +262,45 @@ var maxAmplitutdeFound = AudioSample.min    // 0
 ```
 
 # Error Handling
+same in [00FirstGlance.md#Error_Handling](https://github.com/xshii/XSNote/blob/master/swift/00FirstGlance.md#error-handling)
+
+# Assertions and Preconditions
+if the condition expression in ```assert``` is false, the current state of the program is invalid; code execution ends, and your app is terminated. So, they are used for vital problems rather than recoverable or expected errors.
+
+## ```assert```
+Rules:
+1. ```assert``` is checked only in debug builds, but preconditions are checked in both debug and production builds.
+2. ```assert(_:_:file:line:)```, the mandatory first input should be condition expression and the optional second input should be the error message - a ```String``` type.
+```swift
+let age = -3
+assert(age >= 0, "A person's age can't be less than zero.")
+// "A per....zero."
+
+assert(age>-0)
+```
+
+3. use the ```assertionFailure(_:file:line:)``` if the code already ckecks the condition to be false.
+```swift
+if age > 10 {
+    print("You can ride the roller-coaster or the ferris wheel.")
+} else if age > 0 {
+    print("You can ride the ferris wheel.")
+} else {
+    assertionFailure("A person's age can't be less than zero.")
+}
+```
+
+## Enforcing Preconditons
+use a precondition to ckeck that 
+1. a subscript is not out pf bounds
+2. check that a function has been passed a valid value.
+
+
+Rules:
+1. ```precondition(_:_:file:line:)``` same as ```assert```
+2. call the ```precondtionFailure(_:file:line:)``` same as ```assertionFailure(_:file:line:)```
+3. if you compile in unchecked mode (```-0unchecked```), preconditons aren't checked. However, the ```fatalError(_:file:line:)``` function still works and always halts execution.
+```swift
+// In the implementation of a subscript...
+precondition(index > 0, "Index must be greater than zero.")
+```
