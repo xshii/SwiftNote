@@ -1,3 +1,19 @@
+- [Introduction](#introduction)
+    - [mostly used methods:](#mostly-used-methods)
+- [```for-in``` loop](#for-in-loop)
+- [```while``` loops](#while-loops)
+    - [```repeat-while```](#repeat-while)
+- [Conditional Statements](#conditional-statements)
+    - [```if-else```](#if-else)
+    - [```switch-case-default```](#switch-case-default)
+        - [VaLue Bindings](#value-bindings)
+- [Control Transfer Statements](#control-transfer-statements)
+    - [```continue```](#continue)
+    - [```break```](#break)
+    - [```fallthrough```](#fallthrough)
+- [Labeled Statements](#labeled-statements)
+- [Early Exit ```guard```](#early-exit-guard)
+- [Checking API Availability ```#available()```](#checking-api-availability-available)
 # Introduction
 ```for-in, while, if-else, guard, switch-case, repeat-while```
 
@@ -9,6 +25,15 @@
     * Matched values can be bound to temporary constants or variables for use within the ```case```'s body.
     * complex matching conditions can be expressed with a ```where``` clause for each case.
 
+## mostly used methods:
+* ```stride(from:to:by:)```
+* ```case (_,0)```, ```case (let x,0)```, ```case (let x,0), (0, let x)```
+* ```case: (let x, let y) where x==y```
+* ```label_name : loop...{}```
+* ```break, continue,fallthrough```
+* ```break label_name```
+* ```#available(platform version, ..., *)```
+* ```guard let someVar = someOptional else{... return ...}```
 # ```for-in``` loop
 Rules:
 1. Use ```for-in``` loop to iterate over a sequence, such as 
@@ -208,4 +233,16 @@ greet(person: ["name": "Jane", "location": "Cupertino"])
 // "Hello Jane!"
 // "I hope the weather is nice in Cupertino."
 ```
-# Checking
+# Checking API Availability ```#available()```
+Rules:
+1. Normally used in ```if-else``` statement or ```guard``` statement
+```swift
+if #available(iOS 10, macOS 10.12, *) {
+    // Use iOS 10 APIs on iOS, and use macOS 10.12 APIs on macOS
+} else {
+    // Fall back to earlier iOS and macOS APIs
+}
+```
+2. ```#available(platform_name version,...,*)``` 
+    
+    * ```iOS```, ```macOS```, ```watchOS```, ```tvOS```
